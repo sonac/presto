@@ -1,0 +1,21 @@
+---
+# brings up the dependencies
+version: '2'
+services:
+  presto:
+    build: .
+    links:
+      - postgresql
+    depends_on:
+      - postgresql
+    ports:
+      - "8080:8080"
+
+  postgresql:
+    build: ./postgresql
+    environment:
+      POSTGRES_USER: 'rave'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'rave'
+    ports:
+      - "5432:5432"
